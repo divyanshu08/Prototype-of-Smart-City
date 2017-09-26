@@ -1,0 +1,40 @@
+# Prototype-of-Smart-City
+
+int ir1=13;
+int ir2=3;
+int ir3=7;
+int ir4=5;
+
+int cond_1;
+int cond_2;
+int cond_3;
+int cond_4;
+
+
+void setup() 
+{
+  pinMode(ir1,INPUT);
+  pinMode(ir2,INPUT); 
+ 
+  pinMode(ir3,INPUT);
+  pinMode(ir4,INPUT); 
+}
+
+
+void loop(){
+  cond_1=digitalRead(ir1);
+  cond_2=digitalRead(ir2);
+
+if(cond_1 ==1 )
+{
+  lcd.setCursor(0,0);
+  
+  lcd.print("Full");
+  
+  Serial.print("full");
+  
+  delay(500);
+  lcd.clear();
+    
+}
+}
