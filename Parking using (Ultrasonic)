@@ -1,0 +1,51 @@
+
+#include <LiquidCrystal.h>
+/* rs,rw,enable,d4 to d7*/
+LiquidCrystal lcd(8,13,9,4,5,6,7);
+
+#define Triggerpin 3
+#define Echopin 2
+
+
+void setup()
+{
+  Serial.begin(9600);
+  lcd.begin(16,2);
+  pinMode(Triggerpin, OUTPUT);
+  pinMode(Echopin, INPUT);
+  Serial.println("Ultrasonic rangining Module:");
+}
+
+void loop()
+{
+  digitalWrite(Triggerpin, LOW);
+  digitalWrite(Triggerpin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(Triggerpin, LOW);
+
+  long duration = pulseIn(Echopin, HIGH);
+  
+  float distance = duration*0.034/2;
+
+  lcd.setCursor(0,0);
+  lcd.print("time:");
+  lcd.print(duration);
+  lcd.print("uS");
+  lcd.setCursor(0,1);
+
+  if (duration > 9000)
+  {
+    lcd.println("far");
+  }
+  else 
+  {
+    lcd.println("dist:");
+    lcd.println(distance);
+    lcd.println("cm");
+    Serial.print("dist :");
+    Serial.println(distance);
+    Serial.println("cm");
+  }
+ 
+  delay(100);
+}
