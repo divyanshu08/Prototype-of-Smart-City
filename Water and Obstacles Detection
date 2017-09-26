@@ -1,0 +1,64 @@
+
+
+#define buzzer 4
+#define Triggerpin 3
+#define Echopin 2
+
+
+void setup()
+{
+  Serial.begin(9600);
+  
+  pinMode(Triggerpin, OUTPUT);
+  pinMode(Echopin, INPUT);
+  pinMode(buzzer, OUTPUT);
+  Serial.println("Ultrasonic rangining Module:");
+}
+
+void loop()
+{
+  digitalWrite(Triggerpin, LOW);
+  digitalWrite(Triggerpin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(Triggerpin, LOW);
+
+  long duration = pulseIn(Echopin, HIGH);
+  
+  float distance = duration*0.034/2;
+
+  
+  if (distance < 9)
+  {
+    Serial.println("near");
+    digitalWrite(buzzer,HIGH);
+  }
+  else 
+  {
+    digitalWrite(buzzer,LOW);
+    
+    Serial.print("dist :");
+    Serial.println(distance);
+    Serial.println("cm");
+  }
+ 
+  delay(100);
+}
+
+
+
+
+WATER DETECTION
+
+void setup() {
+   pinMode(8, INPUT); // The Water Sensor is an Input
+   pinMode(9, OUTPUT); // The LED is an Output
+}
+
+void loop() {
+  
+   if( digitalRead(8) == LOW) {
+      digitalWrite(9,HIGH);
+   }else {
+      digitalWrite(9,LOW);
+   }
+}
